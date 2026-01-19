@@ -1,0 +1,83 @@
+<!-- <% layout("/layout/boilerplate") %>
+<body>
+    <h1>all listings</h1>  -->
+    <!-- <form method="GET" action="/listings/new">
+<button>add new list</button>
+</form> -->
+ <!-- <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4 mt-3">
+    <% for(let listing of allListings){%>
+      <div class="card col" style="width: 20rem;">
+  <img src="<%=listing.image.url%>" class="card-img-top" alt="listing_image">
+  <div class="card-body">
+
+    <p class="card-text">
+
+        <%= listing.title %><br>
+
+        <%= listing.description %><br>
+
+             <% if (listing.price != null) { %>
+             &#8377;<%= listing.price.toLocaleString("en-IN") %> / night
+             <% } else { %>
+                Not specified
+             <% } %>
+
+    </p>
+
+  </div>
+</div>
+ <% }%>
+</div>
+
+    <ul>
+        <% for(let listing of allListings){%>
+        <li> <a href="/listings/<%=listing._id%>"><%=listing.title%></a></li>
+        <% }%>
+    </ul>
+   
+ 
+ </body> -->
+
+ <% layout("/layout/boilerplate") %>
+<body>
+  <h3 class="mt-3">All Listings</h3>
+
+  <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1 g-4 mt-1">
+    
+    <% for(let listing of allListings) { %>
+        <a href="/listings/<%= listing._id %>" class="listing-link">
+            <div class="col">
+        
+        <div class="card col">
+          <img 
+  src="<%= listing.image?.url || 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee' %>"
+  class="card-img-top"
+  style="height: 200px; object-fit: cover;"
+  alt="listing_image"
+>
+
+
+            <div class="card-img-overlay">
+                
+                </div>
+          <div class="card-body px-0">
+            <p class="card-text">
+              <b><%= listing.title %></b><br>
+              <span class="text-secondary" style="font-size: 0.9rem;">
+                <%= listing.description %>
+              </span><br>
+              <% if (listing.price != null) { %>
+                &#8377;<%= listing.price.toLocaleString("en-IN") %> / night
+              <% } else { %>
+                Not specified
+              <% } %>
+            </p>
+          </div>
+        </div>
+
+      </div>
+        </a>
+       <% } %>
+    
+  </div>
+</body>  

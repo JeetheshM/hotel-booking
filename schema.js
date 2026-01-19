@@ -1,0 +1,42 @@
+// const joi = require("joi");
+// module.exports.listingSchema=joi.object({
+//     listing: Joi.object({
+//         title:joi.string().required(),
+//         description:joi.string().required(),
+//         location:joi.string().required(),
+//         country:joi.string().required(),
+//         price : joi.number().required().min(0),
+//         image:joi.string().allow("",null),
+//     }).required(),
+// });
+
+// const joi = require("joi");
+
+// module.exports.listingSchema = joi.object({
+//     listing: joi.object({
+//         title: joi.string().required(),
+//         description: joi.string().required(),
+//         location: joi.string().required(),
+//         country: joi.string().required(),
+//         price: joi.number().required().min(0),
+//         image: joi.string().allow("", null).optional(),
+//     }).required(),
+// });
+
+const joi = require("joi");
+
+module.exports.listingSchema = joi.object({
+  listing: joi.object({
+    title: joi.string().required(),
+    description: joi.string().required(),
+    location: joi.string().required(),
+    country: joi.string().required(),
+    price: joi.number().required().min(0),
+
+    image: joi.object({
+      url: joi.string().uri().allow("").optional(),
+      filename: joi.string().allow("").optional(),
+    }).optional(),
+  }).required(),
+});
+
