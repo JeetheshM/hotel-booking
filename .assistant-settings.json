@@ -1,6 +1,6 @@
 {
-  "proposeOnly": true,
+  "proposeOnly": false,
   "showErrors": true,
-  "applyAfterKeep": true,
+  "applyAfterKeep": false,
   "lastChangedBy": "assistant"
 }

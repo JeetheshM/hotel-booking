@@ -45,17 +45,6 @@ const validateListing = (req, res, next) => {
 app.use("/listings",listings);
 app.use("/listings/:id/reviews",reviews);
 
-
-
-// ---------------- ROUTES ----------------
-
-
-
-
-// ---------------- REVIEWS ----------------
-
-
-
 // 404 handler
 app.use((req, res, next) => {
     next(new ExpressError(404, "page not found!!"));
