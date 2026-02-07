@@ -1,0 +1,5 @@
+{
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.inlineSuggest.enable": true,
+  "editor.inlineSuggest.delay": 100
+}
