@@ -1,5 +1,76 @@
 {
   "editor.inlineSuggest.enabled": true,
   "github.copilot.inlineSuggest.enable": true,
-  "editor.inlineSuggest.delay": 100
+  "editor.inlineSuggest.delay": 0,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": true,
+    "scminput": false
+  },
+  "github.copilot.editor.enableAutoCompletions": true,
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": true,
+    "strings": true
+  },
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.acceptSuggestionOnCommitCharacter": true,
+  "editor.acceptSuggestionOnEnter": "on",
+  "editor.tabCompletion": "on",
+  "editor.snippetSuggestions": "inline",
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "editor.suggest.preview": true,
+  "editor.wordBasedSuggestions": "matchingDocuments",
+  "editor.suggest.showKeywords": true,
+  "editor.suggest.showSnippets": true,
+  "editor.suggest.localityBonus": true,
+  "editor.suggestSelection": "first",
+  "editor.parameterHints.enabled": true,
+  "emmet.includeLanguages": {
+    "ejs": "html"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "[ejs]": {
+    "editor.inlineSuggest.enabled": true,
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": true,
+      "strings": true
+    },
+    "editor.suggestOnTriggerCharacters": true
+  },
+  "[html]": {
+    "editor.inlineSuggest.enabled": true
+  },
+  "[css]": {
+    "editor.inlineSuggest.enabled": true
+  },
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "editor.formatOnSave": false,
+  "editor.codeLens": false,
+  "editor.occurrencesHighlight": "off",
+  "editor.selectionHighlight": false,
+  "editor.bracketPairColorization.enabled": false,
+  "editor.guides.bracketPairs": false,
+  "breadcrumbs.enabled": false,
+  "workbench.editor.enablePreview": true,
+  "extensions.autoUpdate": false,
+  "typescript.tsserver.maxTsServerMemory": 2048,
+  "files.exclude": {
+    "node_modules": true,
+    "**/.git": true,
+    "**/.vscode": true
+  },
+  "files.watcherExclude": {
+    "node_modules": true,
+    "**/.git": true,
+    "**/dist": true,
+    "**/.next": true
+  },
+  "search.exclude": {
+    "node_modules": true,
+    "**/.git": true
+  }
 }

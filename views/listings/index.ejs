@@ -2,8 +2,136 @@
 
  <% layout("/layout/boilerplate") %>
  
-<body>
-  <h3 class="mt-3">All Listings</h3>
+<style>
+  #filters{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .filter{
+    text-align:center;
+    margin-right:2rem;
+    margin-top:2rem;
+    opacity:0.6;
+  }
+  .filter:hover{
+    opacity:1;
+    cursor:pointer;
+  }
+  .filter.active-filter{
+    opacity:1;
+    border-bottom:2px solid #222;
+  }
+  .filter p{
+    font-size:0.8 rem;
+  }
+  .tax_info{
+    display:none;
+  }
+  .tax-toggle{
+    border:1px solid black;
+    border-radius:1rem;
+    height:3.2rem;
+    padding:1rem;
+    margin-left:auto;
+    margin-right:auto;
+    display:flex;
+    align-items:center;
+  }
+  .active-filter-chip{
+    margin-top:1rem;
+    display:inline-flex;
+    align-items:center;
+    gap:0.5rem;
+    border:1px solid #ddd;
+    border-radius:999px;
+    padding:0.4rem 0.8rem;
+    font-size:0.9rem;
+    background:#fafafa;
+  }
+</style>
+  <!-- <h3 class="mt-3">All Listings</h3> -->
+   <div id="filters">
+
+    <div class="filter">
+      <div><i class="fa-solid fa-fire"></i></div>
+     <p> Trending</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-bed"></i></div>
+     <p> Rooms</p>
+    </div>
+
+    <div class="filter">
+      <div><i class="fa-solid fa-mountain-city"></i></div>
+     <p> Iconic cities</p>
+    </div>
+
+    <div class="filter">
+      <div><i class="fa-solid fa-mountain"></i></div>
+     <p> Mountains</p>
+    </div>
+
+    <div class="filter">
+      <div><i class="fa-brands fa-fort-awesome-alt"></i></div>
+     <p> Castels</p>
+    </div>
+
+    <div class="filter">
+      <div><i class="fa-solid fa-person-swimming"></i></div>
+     <p> Amazing pools</p>
+    </div>
+
+    <div class="filter">
+      <div><i class="fa-solid fa-campground"></i></div>
+     <p> Camping</p>
+    </div>
+
+    <div class="filter">
+      <div><i class="fa-solid fa-cow"></i></div>
+     <p> Farms</p>
+    </div>
+
+    <div class="filter">
+      <div><i class="fa-solid fa-person-swimming"></i></div>
+     <p> Amazing pools</p>
+    </div>
+
+    <div class="filter">
+      <div><i class="fa-regular fa-snowflake"></i></div>
+     <p> Arctic</p>
+    </div>
+
+    <div class="filter">
+      <div><i class="fa-solid fa-landmark-dome"></i></div>
+     <p> Domes</p>
+    </div>
+
+    <div class="filter">
+      <div><i class="fa-solid fa-ship"></i></div>
+     <p> boats</p>
+    </div>
+      <div class="tax-toggle">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+             <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
+        </div>
+      </div>
+
+   </div>
+
+  <% if (activeCategory) { %>
+    <div class="active-filter-chip">
+      <span>Category: <b><%= activeCategory %></b></span>
+      <a href="/listings<%= searchQuery ? `?search=${encodeURIComponent(searchQuery)}` : '' %>">Clear filter</a>
+    </div>
+  <% } %>
+
+  <% if (allListings.length === 0) { %>
+    <div class="alert alert-warning mt-4" role="alert">
+      No listings found for "<%= searchQuery %>".
+    </div>
+  <% } %>
 
   <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1 g-4 mt-1">
     
@@ -13,7 +141,7 @@
         
         <div class="card col listing-card">
           <img 
-  src="<%= listing.image?.url || 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee' %>"
+  src="<%= listing.image.url || 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee' %>"
   class="card-img-top"
   style="height: 200px; object-fit: cover;"
   alt="listing_image"
@@ -31,6 +159,7 @@
               </span><br>
               <% if (listing.price != null) { %>
                 &#8377;<%= listing.price.toLocaleString("en-IN") %> / night
+                <i class="tax_info"> &nbsp;&nbsp;(&#8377;<%= Math.round(listing.price * 1.18).toLocaleString("en-IN") %> incl. GST)</i>
               <% } else { %>
                 Not specified
               <% } %>
@@ -43,4 +172,55 @@
        <% } %>
     
   </div>
-</body>  
+
+<script>
+  let taxSwitch=document.getElementById("switchCheckDefault");
+  taxSwitch.addEventListener("change",()=>{
+    let taxInfo=document.querySelectorAll(".tax_info");
+    taxInfo.forEach(info=>{
+      info.style.display = taxSwitch.checked ? "inline" : "none";
+    })
+  })
+
+  const categoryByOrder = [
+    "Trending",
+    "Rooms",
+    "Iconic cities",
+    "Mountains",
+    "Castels",
+    "Amazing pools",
+    "Camping",
+    "Farms",
+    "Amazing pools",
+    "Arctic",
+    "Domes",
+    "Boats",
+  ];
+
+  const currentParams = new URLSearchParams(window.location.search);
+  const currentCategory = currentParams.get("category");
+  const filters = document.querySelectorAll("#filters .filter");
+
+  filters.forEach((filterEl, index) => {
+    const category = categoryByOrder[index];
+    if (!category) return;
+
+    filterEl.dataset.category = category;
+
+    if (currentCategory === category) {
+      filterEl.classList.add("active-filter");
+    }
+
+    filterEl.addEventListener("click", () => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("category") === category) {
+        params.delete("category");
+      } else {
+        params.set("category", category);
+      }
+
+      const queryString = params.toString();
+      window.location.href = queryString ? `/listings?${queryString}` : "/listings";
+    });
+  });
+</script>

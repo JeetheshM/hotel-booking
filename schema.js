@@ -24,6 +24,7 @@
 // });
 
 const joi = require("joi");
+const { listingCategories } = require("./utils/listingCategories.js");
 
 module.exports.listingSchema = joi.object({
   listing: joi.object({
@@ -37,6 +38,7 @@ module.exports.listingSchema = joi.object({
       url: joi.string().uri().allow("").optional(),
       filename: joi.string().allow("").optional(),
     }).optional(),
+    category: joi.string().valid(...listingCategories).required(),
   }).required(),
 });
 
