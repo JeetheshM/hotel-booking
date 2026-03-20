@@ -1,7 +1,7 @@
 <% layout("/layout/boilerplate") %>
  
     <div class="row mt-3">
-        <div class="col-6 offset-2">
+        <div class="col-12 col-md-8 col-lg-6 mx-auto">
     <form method="POST" action="/listings" enctype="multipart/form-data">
         <br><br>
            <h3>create a new listing</h3>
@@ -35,10 +35,9 @@
                 <label for="image" class="form-label">Upload image</label>
                 <input 
                     name="listing[image]" 
-                    
                     type="file" 
-                    class="form-control">
-                    required
+                    class="form-control"
+                    required>
 
          </div>
 

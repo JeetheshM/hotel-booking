@@ -23,6 +23,26 @@
     background-color:#fe424d;
     color:#fff;
     }
+
+    .nav-search-form {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    @media (max-width: 767.98px) {
+      .search-input {
+        padding: 0.35rem 0.85rem;
+      }
+
+      .nav-search-form {
+        max-width: 100%;
+        margin: 0.45rem 0;
+      }
+
+      .nav-search-form .btn-search {
+        padding: 0 0.8rem;
+      }
+    }
 </style>
 
 <nav class="navbar navbar-expand-md bg-light border-bottom sticky-top">
@@ -43,7 +63,7 @@
         
       </div>
       <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search" action="/listings" method="GET">
+        <form class="d-flex nav-search-form" role="search" action="/listings" method="GET">
           <% if (typeof activeCategory !== 'undefined' && activeCategory) { %>
             <input type="hidden" name="category" value="<%= activeCategory %>">
           <% } %>

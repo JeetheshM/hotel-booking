@@ -7,6 +7,7 @@
     display:flex;
     flex-wrap:wrap;
     align-items:center;
+    gap:0.4rem;
   }
   .filter{
     text-align:center;
@@ -48,6 +49,28 @@
     padding:0.4rem 0.8rem;
     font-size:0.9rem;
     background:#fafafa;
+  }
+
+  @media (max-width: 767.98px) {
+    #filters {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 0.35rem;
+    }
+
+    .filter {
+      margin-right: 1rem;
+      margin-top: 1rem;
+      min-width: 70px;
+      flex: 0 0 auto;
+    }
+
+    .tax-toggle {
+      margin: 1rem 0 0 0;
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
   }
 </style>
   <!-- <h3 class="mt-3">All Listings</h3> -->
@@ -133,7 +156,7 @@
     </div>
   <% } %>
 
-  <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1 g-4 mt-1">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mt-1">
     
     <% for(let listing of allListings) { %>
         <a href="/listings/<%= listing._id %>" class="listing-link">
