@@ -1,11 +1,24 @@
-flowchart TD
-  A[User Browser] -->|GET or POST| B[Express App app.js]
+# LedgerLodge
 
-  subgraph Middleware Layer
-    B --> C[Body Parser and Method Override]
-    C --> D[Session Store connect-mongo]
-    D --> E[Passport Auth]
-    E --> F[Flash Messages]
-  end
+LedgerLodge is a full-stack hotel listing web app where users can browse stays, add listings, write reviews, and manage accounts in a smooth workflow.
 
-  F --> G{Route Group}
+## Why LedgerLodge
+- Simple and elegant user experience
+- Secure login and session handling
+- Real-time listing and review management
+- Cloud image storage and MongoDB Atlas integration
+
+## Core Features
+- User authentication and authorization
+- Create, edit, view, and delete listings
+- Add and remove reviews
+- Flash messages and validation for better UX
+- Responsive interface using EJS templates
+
+## Tech Stack
+- Node.js and Express
+- MongoDB Atlas and Mongoose
+- EJS and Bootstrap
+- Passport for authentication
+- Cloudinary for image storage
+
